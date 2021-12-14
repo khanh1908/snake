@@ -154,7 +154,7 @@ def draw():
     # biên dọc phải
     Screen.blit(wall1, (790, 56))
     # draw food score
-    Screen.blit(food, (128, 15))
+#     Screen.blit(food, (128, 15))
 def game():
     # game_over()
     # pygame.mixer.Sound.play(sound)
@@ -262,6 +262,7 @@ def game():
             if snakepos[0] == bodysnake[0] and snakepos[1] == bodysnake[1]:
                 game_over(score)
         # In ra điểm trong khi game chạy
+        Screen.blit(food, (128, 15))
         font = pygame.font.SysFont('consolas', 28)
         Score = font.render("Score:" + str(score), True, red)
         Screen.blit(Score, (5, 15))
