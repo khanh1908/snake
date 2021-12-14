@@ -184,31 +184,34 @@ def game():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            # xử lý phím
+            # xử lý phím/ hướng đi
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
                     changeto = 'RIGHT'
+                    # direction = 'RIGHT'
+                    if changeto == 'RIGHT' and not direction == 'LEFT':
+                        direction = 'RIGHT'
                 if event.key == pygame.K_LEFT:
                     changeto = 'LEFT'
+                    # direction = 'LEFT'
+                    if changeto == 'LEFT' and not direction == 'RIGHT':
+                        direction = 'LEFT'
                 if event.key == pygame.K_UP:
                     changeto = 'UP'
+                    # direction = 'UP'
+                    if changeto == 'UP' and not direction == 'DOWN':
+                        direction = 'UP'
                 if event.key == pygame.K_DOWN:
                     changeto = 'DOWN'
+                    # direction = 'DOWN'
+                    if changeto == 'DOWN' and not direction == 'UP':
+                        direction = 'DOWN'
                 if event.key == pygame.K_SPACE:
                     # time.sleep(10)
                     pause = True
                     paused()
                 if event.key == pygame.K_ESCAPE:
                     pygame.event.post(pygame.event.Event(pygame.QUIT))
-        # hướng đi
-        if changeto == 'RIGHT' and not direction == 'LEFT':
-            direction = 'RIGHT'
-        if changeto == 'LEFT' and not direction == 'RIGHT':
-            direction = 'LEFT'
-        if changeto == 'UP' and not direction == 'DOWN':
-            direction = 'UP'
-        if changeto == 'DOWN' and not direction == 'UP':
-            direction = 'DOWN'
         # cập nhật vị trí mới
         if direction == 'RIGHT':
             snakepos[0] += m
@@ -222,16 +225,17 @@ def game():
         snakebody.insert(0, list(snakepos))
         if snakepos[0] == foodpos[0] and snakepos[1] == foodpos[1]:
             score += 1
-            veloc=veloc*0.98
+            veloc= veloc*0.98
             print(veloc)
             pygame.mixer.Sound.play(sound1)
             # pygame.display.update()
             foodflat = False
         else:
+            # pass
             snakebody.pop()
         # food
         if foodflat == False:
-            foodx = round(random.randrange(30, x - 40) / 10)
+            foodx = round(random.randrange(40, x - 40) / 10)
             foody = round(random.randrange(80, y - 40) / 10)
             if foodx % 2 != 0:
                 foodx += 1
